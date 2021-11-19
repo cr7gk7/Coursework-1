@@ -12,7 +12,7 @@
     <div id="app">
         <header>
             <h1 v-text="sitename"></h1>
-            <button v-on:click='showCheckout' :disabled='!showCheckout'>
+            <button v-on:click='showCheckout'>
                 {{cartItemCount}}
                 <span class="fas fa-cart-plus"></span> Checkout
             </button>
@@ -142,13 +142,26 @@
                     return this.product.sort(compare)
                 },
 
-                nameValidation() {
-                    if (/^[a-zA-Z]+(?:-[a-zA-Z]+)*$/.test(this.name)) {
-                        return true
-                    } else {
-                        false
+                validate() {
+                    var phoneNumber = document.getElementById('number').value;
+                    var Name = document.getElementById('name').value;
+                    var phoneRGEX = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
+                    var nameRGEX = /^[a-zA-Z]+ [a-zA-Z]+$/;
+                    var phoneResult = phoneRGEX.test(phoneNumber);
+                    var nameResult = nameRGEX.test(Name);
+                    if (phoneResult == false) {
+                        alert('Please enter a valid phone number');
+                        return false;
                     }
+
+                    if (nameResult == false) {
+                        alert('Please enter a valid Name');
+                        return false;
+                    }
+
+                    return true;
                 }
+
             },
 
         });
